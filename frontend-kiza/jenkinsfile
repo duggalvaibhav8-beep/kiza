@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    environment {
+        NODE_ENV = 'development'
+    }
+
+    tools {
+        nodejs 'nodeJS'
+    }
+
+    triggers {
+        pollSCM('H/5 * * * *')
+    }
+
+    stages {
+        stage('check repo') {
+            steps {
+                echo 'Cloning the gitHub repo'
+                git branch: 'main', url: 'https://github.com/KaranManhas22/Front-KIZA.git'
+            }
+        }
+
+        stage('Install nodejs') {
+            steps {
+                echo 'Installing nodeJs'
+                sh 'npm install'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                echo 'Run'
+                sh 'npm start'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Compiled successfully'
+        }
+        failure {
+            echo 'Not Compiled'
+        }
+    }
+}
