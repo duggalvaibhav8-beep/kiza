@@ -12,9 +12,9 @@ pipeline {
          stage('second') {
             steps {
                 dir('backend') {
-                    bat 'npm i'
-                    bat 'npm i pm2 -g'
-                    bat 'pm2 start index.js --name bihari'
+                    sh 'npm i'
+                    sh 'npm i pm2 -g'
+                    sh 'pm2 start index.js --name bihari'
                 }
                 
             }
@@ -23,8 +23,8 @@ pipeline {
          stage('third') {
             steps {
                 dir('frontend-kiza'){
-                    bat 'npm i'
-                    bat 'npm run build'
+                    sh 'npm i'
+                    sh 'npm run build'
                 }
             }
         }
