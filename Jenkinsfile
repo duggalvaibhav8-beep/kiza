@@ -9,16 +9,16 @@ pipeline {
             }
         }
         
-        //  stage('second') {
-        //     steps {
-        //         dir('backend') {
-        //             sh 'npm i'
-        //             sh 'npm i pm2 -g'
-        //             sh 'pm2 start index.js --name bihari'
-        //         }
+         stage('second') {
+            steps {
+                dir('backend') {
+                    sh 'npm i'
+                    sh 'npm i pm2 -g'
+                    sh 'pm2 start index.js --name bihari'
+                }
                 
-        //     }
-        // }
+            }
+        }
         
         //  stage('third') {
         //     steps {
