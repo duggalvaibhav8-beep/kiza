@@ -13,10 +13,11 @@ pipeline {
             steps {
                 dir('backend') {
                     sh 'npm i'
-                    sh 'npm i pm2 -g'
-                    sh 'pm2 delete bihari || true'
-                    sh 'pm2 delete backend || true'
-                    sh 'pm2 start index.js --name bihari'
+                    sh 'npm start'
+                    // sh 'npm i pm2 -g'
+                    // sh 'pm2 delete bihari || true'
+                    // sh 'pm2 delete backend || true'
+                    // sh 'pm2 start index.js --name bihari'
                 }
                 
             }
