@@ -9,7 +9,7 @@ pipeline {
 
         stage('Clone Repo') {
             steps {
-                git url: 'https://github.com/KaranManhas22/Vaibhav.git', branch: 'main'
+                git url: 'https://github.com/duggalvaibhav8-beep/kiza.git', branch: 'main'
             }
         }
 
