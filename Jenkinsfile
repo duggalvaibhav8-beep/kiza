@@ -1,36 +1,51 @@
 pipeline {
     agent any
-    tools {nodejs 'Mynode'}
+
+    tools {
+        nodejs 'Mynode'
+    }
 
     stages {
-        stage('first') {
+
+        stage('Clone Repo') {
             steps {
-                git url: 'https://github.com/duggalvaibhav8-beep/kiza.git' , branch: 'main'
+                git url: 'https://github.com/KaranManhas22/Vaibhav.git', branch: 'main'
             }
         }
-        
-         stage('second') {
+
+        stage('Install Backend') {
             steps {
                 dir('backend') {
-                    sh 'npm i'
-                    sh 'npm start'
-                    // sh 'npm i pm2 -g'
-                    // sh 'pm2 delete bihari || true'
-                    // sh 'pm2 delete backend || true'
-                    // sh 'pm2 start index.js --name bihari'
+                    sh 'npm install'
                 }
-                
             }
         }
-        
-        //  stage('third') {
-        //     steps {
-        //         dir('frontend-kiza'){
-        //             sh 'npm i'
-        //             sh 'npm run build'
-        //         }
-        //     }
-        // }
-        
+
+        stage('Build Frontend') {
+            steps {
+                dir('frontend-kiza') {   // ✅ FIXED NAME
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Run Backend with PM2') {
+    steps {
+        sh '''
+        sudo -u ubuntu pm2 delete backend || true
+        sudo -u ubuntu pm2 start /var/lib/jenkins/workspace/kiza/backend/index.js --name backend
+        '''
+    }
+}
+
+     stage('Deploy Frontend') {
+    steps {
+        sh '''
+        sudo rm -rf /var/www/html/*
+        sudo cp -r frontend-kiza/dist/front-end/* /var/www/html/
+        '''
+    }
+}
     }
 }
