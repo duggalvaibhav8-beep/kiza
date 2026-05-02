@@ -1,27 +1,30 @@
 name: next git
+
 on:
   push:
     branches: ['main']
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-    
 jobs:
   run-app:
-      runs-on: [self-hosted, Windows]
-      steps:
+    runs-on: [self-hosted, Windows, X64]
+
+    defaults:
+      run:
+        shell: cmd
+
+    steps:
       - uses: actions/checkout@v4
+
       - name: Install frontend-kiza
         run: npm install
         working-directory: frontend-kiza
 
-      - name: Start frontend-kiza 
+      - name: Start frontend-kiza
         run: |
-          pm2 delete angular-front || true
+          pm2 delete angular-front || exit /b 0
           pm2 start npm --name angular-front -- start -- --host 0.0.0.0 --port 4200
         working-directory: frontend-kiza
 
-      # Backend Node
       - name: Install backend
         run: npm install
         working-directory: backend
@@ -31,5 +34,3 @@ jobs:
           pm2 delete node-backend || exit /b 0
           pm2 start npm --name node-backend -- start
         working-directory: backend
-     
-    
