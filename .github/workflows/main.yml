@@ -8,7 +8,7 @@ env:
     
 jobs:
   run-app:
-      runs-on: self-hosted
+      runs-on: [self-hosted, Windows]
       
       defaults:
        run:
