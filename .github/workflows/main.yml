@@ -20,8 +20,8 @@ jobs:
 
       - name: Start frontend-kiza
         run: |
-          pm2 delete angular-front || exit /b 0
-          pm2 start "npx ng serve --host 0.0.0.0 --port 4200" --name angular-front
+          node C:\Users\User\AppData\Roaming\npm\node_modules\pm2\bin\pm2 delete angular-front || exit /b 0
+          node C:\Users\User\AppData\Roaming\npm\node_modules\pm2\bin\pm2 start "npx ng serve --host 0.0.0.0 --port 4200" --name angular-front
         working-directory: frontend-kiza
 
       - name: Install backend
@@ -30,8 +30,8 @@ jobs:
 
       - name: Start backend
         run: |
-          pm2 delete node-backend || exit /b 0
-          pm2 start server.js --name node-backend
+          node C:\Users\User\AppData\Roaming\npm\node_modules\pm2\bin\pm2 delete node-backend || exit /b 0
+          node C:\Users\User\AppData\Roaming\npm\node_modules\pm2\bin\pm2 start server.js --name node-backend
         working-directory: backend
 
 
