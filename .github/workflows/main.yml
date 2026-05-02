@@ -9,11 +9,6 @@ env:
 jobs:
   run-app:
       runs-on: [self-hosted, Windows]
-      
-      defaults:
-       run:
-        shell: cmd
-
       steps:
       - uses: actions/checkout@v4
       - name: Install frontend-kiza
