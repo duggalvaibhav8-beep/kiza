@@ -9,7 +9,7 @@ jobs:
     runs-on: [self-hosted, Windows, X64]
     defaults:
       run:
-        shell: 'C:\Windows\System32\cmd.exe /D /E:ON /V:OFF /S /C "CALL "{0}""'
+        shell: cmd
 
 
     steps:
