@@ -33,7 +33,6 @@ pipeline {
         stage('Run Backend with PM2') {
     steps {
         sh '''
-        sudo -u ubuntu pm2 delete backend || true
         sudo -u ubuntu pm2 start /var/lib/jenkins/workspace/kiza/backend/index.js --name backend
         '''
     }
