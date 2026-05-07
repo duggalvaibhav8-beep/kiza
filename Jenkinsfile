@@ -29,14 +29,16 @@ pipeline {
                 }
             }
         }
-
-        stage('Run Backend with PM2') {
-    steps {
-        sh '''
-        sudo -u ubuntu pm2 start /var/lib/jenkins/workspace/kiza/backend/index.js --name backend
+        stage('Deploy Backend') {
+         steps {
+           sh '''
+            pm2 delete backend || true
+            pm2 start backend/index.js --name backend
+            pm2 save
         '''
+       }
     }
-}
+        
 
      stage('Deploy Frontend') {
     steps {
